@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+
+<title>购买流量包</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/sweetalert.js"></script>
+<script src="js/json2.js"></script>
+
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/sweetalert.css" rel="stylesheet" />
+<link href="css/userweb.global.css" rel="stylesheet" />
+<link href="css/button-touch.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<style>
+.amount {
+	line-height: 16px;
+	vertical-align: top;
+}
+
+.amount {
+	color: #FF8B00;
+	font-size: 18px;
+}
+
+.package {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	margin-left: -15px;
+	margin-right: -15px;
+	margin-top: 7px;
+}
+
+.package li {
+	float: left;
+	border: 1px solid #ccc;
+	width: 100px;
+	padding: 5px 0px;
+	margin-left: 15px;
+	margin-bottom: 15px;
+	text-align: center;
+	cursor: default;
+}
+
+.package li.active {
+	background-color: #FF8B00;
+	color: white;
+	border-color: #FF8B00;
+}
+
+.bdsug {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	width: 97%;
+	background: #fff;
+	border: 1px solid #ccc;
+	_overflow: hidden;
+	box-shadow: 1px 1px 3px #ededed;
+	-webkit-box-shadow: 1px 1px 3px #ededed;
+	-moz-box-shadow: 1px 1px 3px #ededed;
+	-o-box-shadow: 1px 1px 3px #ededed;
+}
+
+.recharge-info {
+	padding-top: 5px;
+	text-align: left;
+}
+
+a:link {
+	color: #337ab7;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #337ab7;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #337ab7;
+	text-decoration: underline;
+}
+
+.mouseon {
+	background-color: rgb(229, 93, 66);
+}
+
+.mouseout {
+	background-color: rgb(255, 104, 74);
+}
+
+.mask {
+	position: fixed;
+	filter: alpha(opacity = 60);
+	background-color: #000;
+	z-index: 1002;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: none;
+}
+
+.lisence {
+	position: fixed;
+	top: 0;
+	background-color: white;
+	z-index: 1003;
+	margin: 0px;
+	display: none;
+}
+
+.lisence>.content {
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	outline: 0;
+}
+
+.sweet-alert button.cancel {
+	background-color: #FFA930;
+}
+
+.sweet-alert button.cancel:hover {
+	background-color: #F5A22E;
+}
+
+.sweet-alert button {
+	padding: 6px 24px;
+}
+
+//
+.cancel { //
+	width: 114px;
+	//
+}
+
+#maskAndroid,#maskIos {
+	display: none;
+	position: absolute;
+	background-color: #000000;
+	filter: alpha(opacity = 80);
+	opacity: 0.8;
+	overflow: hidden;
+	z-index: 999
+}
+
+.enterprise-name {
+	position: absolute;
+	top: 12px;
+	right: 4%;
+	font-size: 16px;
+}
+
+.name {
+	position: absolute;
+	top: 38px;
+	right: 4%;
+	font-size: 12px;
+}
+
+.expire {
+	position: absolute;
+	left: 32.5%;
+	bottom: 10px;
+	font-size: 12px;
+}
+
+.confine {
+	position: absolute;
+	right: 4%;
+	bottom: 10px;
+	font-size: 12px;
+}
+
+.recharge-footer>.price {
+	height: 36px;
+}
+
+.recharge-footer>.present {
+	margin-left: 12px;
+	width: 29%;
+	height: 36px;
+	padding-top: 0;
+	position: relative;
+}
+
+.recharge-footer>.present s.back {
+	color: #666;
+	line-height: 36px;
+	font-size: 11px;
+}
+
+.recharge-footer>.present s {
+	font-size: 11px;
+	color: #666;
+	top: 3px;
+	position: absolute;
+}
+
+.recharge-footer>.present p {
+	position: absolute;
+	bottom: 0;
+	font-size: 11px;
+	margin-bottom: 0;
+}
+
+.PackageCont .ml.mtwo h3 {
+	top: 15px;
+}
+
+.recharge-footer {
+	padding: 0 15px;
+	height: 45px;
+}
+
+.recharge-footer>.price {
+	height: 45px;
+	line-height: 45px;
+}
+
+.recharge-footer>.present {
+	height: 37px;
+}
+
+.recharge-footer>.present s {
+	top: 5px;
+}
+</style>
+
+
+
+
+</head>
+<body class="bg">
+	<div id="maskAndroid">
+		<img id="maskAndroidImg" src="images/maskAndroid.png" alt="请点这里">
+	</div>
+	<div id="maskIos">
+		<img id="maskIosImg" src="images/maskIos.png" alt="请点这里">
+	</div>
+	<div class="Mask Mask1" style="display: none">
+		<b class="close"></b> <img src="images/image_fangli.png" alt="">
+		<h2>
+			订购到账后返利<i id="reward"></i>
+		</h2>
+		<p></p>
+		<div class="btnWrap">
+			<input type="button" class="btn1" value="领流量券" id="lo_getCoupons">
+		</div>
+	</div>
+	<div class="Mask Mask2">
+		<b class="close"></b> <img src="images/image_success.png" alt="">
+		<h2></h2>
+		<p></p>
+		<div class="btnWrap">
+			<input type="button" class="btn1" value="继续充值" id="continue">
+			<input type="button" class="btn1 clear_r" value="取消" id="cancel">
+		</div>
+	</div>
+	<div class="zhezhao"></div>
+	<div class="recharge">
+		<div class="container relative">
+			<p>手机号</p>
+			<div class="inputWrap">
+				<input placeholder="请输入手机号码" id="inputCellPhoneNumber"
+					maxlength="11" type="tel" class="form-control">
+				<p class="name" id="recharge-message_1"></p>
+			</div>
+			<div class="tip">
+				<p>输入要充值的号码，系统会自动适配流量包</p>
+			</div>
+
+			<div id="tabDiv">
+
+				<table border="0" cellspacing="0" cellpadding="0" class="priceTable">
+					<tr>
+						<td></td>
+						<td>150M</td>
+						<td>500M</td>
+						<td>1G</td>
+						<td>2G</td>
+					</tr>
+					<tr class="Pme">
+						<td>本站价格</td>
+						<td>18</td>
+						<td>27</td>
+						<td>45</td>
+						<td>63</td>
+					</tr>
+					<tr>
+						<td>官方价</td>
+						<td>20</td>
+						<td>30</td>
+						<td>50</td>
+						<td>70</td>
+					</tr>
+					<tr>
+						<td>淘宝价</td>
+						<td>19</td>
+						<td>28.5</td>
+						<td>47.5</td>
+						<td>66.5</td>
+					</tr>
+				</table>
+				上表为部分流量包价格对比，仅供参考！<br> 在本站流量平台订购流量聚划算哦！订购流量还能享受返利哦！<br>
+			</div>
+
+		</div>
+		<input type="hidden" name="openId" id="openId"
+			value="" /> <input type="hidden"
+			name="successOrder" id="successOrder" value="" /> <input
+			type="hidden" name="title" id="title" value="" /> <input
+			type="hidden" name="shareDes" id="shareDes" value="" /> <input
+			type="hidden" name="logo" id="logo" value="" /> <input type="hidden"
+			name="pageLoginNum" id="pageLoginNum" value="15372098311" /> <input
+			type="hidden" name="resourceType" id="resourceType" value="" />
+
+		<div class=" container">
+			<div class="ModWrap">
+				<div class="modPackage hide">
+					<div class="jiayoubao">
+						<div class="PackageTit">
+							<span class="fl">全国流量包<i class=" cL2">当月有效</i></span> <span
+								class="fr More guan  cL2">更多<b class="add"></b></span>
+						</div>
+						<ul class="PackageCont normalPackage">
+							<li class="mOne"></li>
+						</ul>
+					</div>
+				</div>
+				<div class="provPackage hide">
+					<div class="prov">
+						<div class="PackageTit">
+							<span class="fl">省份流量包<i class=" cL3">超值特惠</i></span><span
+								class="fr More guan cL3">更多<b class="add"></b></span>
+						</div>
+						<ul class="PackageCont pPackage">
+							<li class="mTwo"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="showWrap cL1" id="dginfo">
+			<div class="fl" style="text-align: left;">
+				<a href="javascript:;" onclick="chargeInfo()">充值说明</a>
+			</div>
+			<div class=" fr">
+				<a href="javascript:;" onclick="showContactKF()">联系客服</a>
+			</div>
+		</div>
+	</div>
+	
+	<div id="yyImage" class="container center-footer" style="margin-top:50px; margin-bottom:25px; background-color: #F2F2F2; border-top: 0px solid #EBEBEB;">
+		<div style="clear:both;"><span  style="font-size: 8px;">由本站提供技术支持  运营商官方授权合作商</span></div>
+	    <div style="width:60%;MARGIN-RIGHT: 20%; MARGIN-LEFT:  20%;" >
+		     <img width="100%" src="images/yysLOGO.png">
+	   </div>
+	</div>
+
+	<div class="recharge-footer hide" id="btn-footer">
+		<div class="price">
+			￥<span class="value" id="amount">0</span>
+		</div>
+		<div class="present" id="present">
+			<s></s>
+		</div>
+		<div class="button">
+			<button type="button" class="btn btn-red" id="btnConfirmRecharge"
+				data-loading="正在充值" disabled>立即充值</button>
+		</div>
+	</div>
+
+	<div id="mask" class="mask" style="display: none;"></div>
+
+	<script src="js/global.js"></script>
+	<script src="js/mopote.lib.js"></script>
+	<script src="js/mopote.lib.ui.button.js"></script>
+	<script src="js/noty.js"></script>
+	<script src="js/jquery-util.js?v=2015090100"></script>
+	<script src="js/wx-fen-xiang.js?v=2016011200"></script>
+	<script src="js/common.js"></script>
+	<script src="js/wx-share.js"></script>
+
+	<script language="javascript">
+		document.getElementById("maskAndroid").onclick = function() {
+			this.style.display = "none";
+		}
+		document.getElementById("maskIos").onclick = function() {
+			this.style.display = "none";
+		}
+		$J(".selectAble").click(function() {
+
+			var id = $J(this).attr("name");
+			$J("#GM").html($J("#payNaming" + id).html());
+			$J("#bestCouponsName").html($J("#couponsName" + id).html());
+			$J("#couponsDJ").html($J("#freeFee" + id).html());
+			$J("#selectCouponsId").html($J("#couponsId" + id).html());
+
+			if ($J("#coupons").hasClass('checked')) {
+				$J("#coupons").removeClass('checked').addClass('unchecked');
+			}
+
+			$J("#coupons").click();
+			hideUsableCoupons();
+
+		});
+
+		function showUsableCoupons() {
+			$J("#mask").fadeIn();
+			$J('.lisence').show();
+		}
+		function hideUsableCoupons() {
+			$J("#mask").fadeOut();
+			$J('.lisence').hide();
+		}
+
+		function hideMBReturn() {
+			sweetAlert.close();
+		}
+
+		var appid = "wxe1abe2da599ef0f4";
+
+		function isAndroid() {
+			var u = navigator.userAgent;
+			var app = navigator.appVersion;
+			var isAndroid = u.indexOf('Android') > -1; //android终端
+			var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+			return isAndroid;
+		}
+
+		function showContactKF() {
+			swal({
+				title : "联系客服",
+				text : "<div style='text-align:left;'><p>客服电话：0571-88888888</p><p>（7×24小时）</p></div>",
+				html : true
+			});
+		}
+
+		function chargeInfo() {
+			swal({
+				title : "",
+				text : "<div style='text-align:left;'><p>1：流量当月有效，月底失效。</p><p>(广东电信部分号码于套餐结算日失效)</p> <p>2：欠费停机、或名下存在欠费产品的用户、被列入运营商黑名单用户、未办理实名认证、实名资料未返档用户、携号转网用户、170号段虚拟运营商用户、时长计费用户以及其他运营商规则限制的用户均无法成功充值流量。</p><p>3：充值失败用户自动退款，退款将自动退至微信钱包零钱中。</p></div>",
+				html : true
+			});
+		}
+
+		window.baseUrl = "";
+		$J(document).ready(function() {
+			initPage();
+			var form = document.form;
+		});
+		var createSubjectsuccess = {
+
+			fn : function(json) {
+				var Flag = json.Flag;
+				var msg = json.Message;
+				if (Flag != null && Flag == 0) {
+					//$J("#newSubjectId").val(json.Data.newSubjectId);
+					initPage();
+					afterSuccZheZhao();
+				} else {
+					swal(msg);
+				}
+			}
+
+		}
+
+		function afterSuccZheZhao() {
+			$J(".zhezhao").show();
+			$J(".Mask2").show();
+			$J("body").css("position", "fixed");
+			$J(".Mask2")
+					.children("p")
+					.html(
+							'预计1分钟内到账，请查收短信</br>如遇长时间未到账，请联系客服：<a href="tel:4006265070">400-626-5070</a>');
+			$J(".Mask2").children("h2").html('流量订购成功');
+			$J("#maskAndroidImg").attr('src', "./images/maskAndroid.png");
+			$J("#maskIosImg").attr('src', "./images/maskIos.png");
+
+			if (isAndroid()) {//客户端是安卓
+				jQuery('#maskAndroid').css({
+					"height" : function() {
+						return jQuery(document).height();
+					},
+					"width" : function() {
+						return jQuery(document).width();
+					}
+				});
+				jQuery('#maskAndroidImg').css({
+					"width" : function() {
+						return jQuery(document).width();
+					}
+				});
+
+				jQuery('#maskAndroid').show();
+			} else {
+				jQuery('#maskIos').css({
+					"height" : function() {
+						return jQuery(document).height();
+					},
+					"width" : function() {
+						return jQuery(document).width();
+					}
+				});
+				jQuery('#maskIosImg').css({
+					"width" : function() {
+						return jQuery(document).width();
+					}
+				});
+
+				jQuery('#maskIos').show();
+			}
+		};
+
+		function pay(option) {
+
+			wx
+					.chooseWXPay({
+						appid : option.appid,
+						timestamp : option.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的
+						//支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+						nonceStr : option.nonceStr, // 支付签名随机串，不长于 32 位
+						package : option.packageValue, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+						signType : 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+						paySign : option.paySign, // 支付签名
+						success : function(e) {
+							// 支付成功后的回调函数
+							_selected = null;
+
+							if (e.errMsg.indexOf("ok") != -1) {
+								//发起ajax请求
+								var createSubjecturl = "../internal/business_recharge.action";
+								var param = {
+									orderId : $J('#successOrder').val()
+								};
+								ajaxRequest(createSubjecturl, param,
+										createSubjectsuccess, timeoutFunction);
+
+							} else {
+								swal("支付失败,请重新支付!");
+							}
+							$J("#package").find(".item .value").removeClass(
+									"active");
+							$J('#amount').text('0');
+							$J("#btnConfirmRecharge").prop("disabled", true);
+						}
+					});
+		};
+
+		function initPage() {
+			var success = {
+				fn : function(data, status) {
+
+					wx
+							.config({
+								debug : false,
+								appId : appid,
+								timestamp : data.timestamp,
+								nonceStr : data.nonceStr,
+								signature : data.signature,
+								jsApiList : [ 'chooseWXPay', 'openLocation',
+										'showAllNonBaseMenuItem', 'checkJsApi',
+										'onMenuShareTimeline',
+										'onMenuShareAppMessage' ]
+							});
+					wx
+							.ready(function() {
+								var _urlstr = window.location.href;
+								if (_urlstr.indexOf("?") > -1) {
+									_urlstr = _urlstr.substring(0, _urlstr
+											.lastIndexOf("?"));
+								}
+								_urlstr = _urlstr.substring(0, _urlstr
+										.lastIndexOf("/"));
+								//var newSubject = $J("#newSubjectId").val();
+								var imgUrl = _urlstr
+										+ "/images/default-logo.png";
+								var lineLink = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1abe2da599ef0f4&redirect_uri=http%3A%2F%2Fwww.gomzone.com%2Fflux%2Fweixin%2Fwx_getAccessToken.action%3Frp%3Dliuliang.html&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+								var descContent = "易省再省!";
+								var shareTitle = "放胆去玩，手机流量不够？ 立即充值 ！";
+
+								wx.onMenuShareAppMessage({
+									title : shareTitle, // 分享标题
+									desc : descContent, // 分享描述
+									link : lineLink, // 分享链接
+									imgUrl : imgUrl, // 分享图标
+									type : '', // 分享类型,music、video或link，不填默认为link
+									dataUrl : '', // 如果type是music或video，则要提供数据链接，默认为空
+									success : function() {
+										// 用户确认分享后执行的回调函数
+									},
+									cancel : function() {
+										// 用户取消分享后执行的回调函数
+									}
+								});
+
+								wx.onMenuShareTimeline({
+									title : shareTitle, // 分享标题
+									link : lineLink, // 分享链接
+									imgUrl : imgUrl, // 分享图标
+									success : function() {
+										// 用户确认分享后执行的回调函数
+									},
+									cancel : function() {
+										// 用户取消分享后执行的回调函数
+									}
+								});
+
+							});
+				}
+			};
+			//var queryurl = "getSign.json";
+			var queryurl = "../internal/wxpay_getSign.action";
+			var param = {
+				url : (location.href.split('#')[0]).replace(":80", "")
+			};
+			//jQuery.post(queryurl, function(data) {
+			//	alert(data);
+			//}, function(e) {
+			//	alert(e);
+			//})
+			ajaxRequest(queryurl, param, success, timeoutFunction)
+		}
+
+		jQuery(".jiayoubao .More").click(function() {
+			var mores = jQuery(".mOne");
+			//guan的时候点
+			if (jQuery(".jiayoubao .More").hasClass('guan')) {
+				jQuery(mores).each(function(i, more) {
+					if (jQuery(more).hasClass('hide')) {
+						jQuery(more).removeClass('hide');
+					}
+					jQuery(".jiayoubao .More").removeClass('guan');
+				});
+				jQuery(".jiayoubao .More").html('');
+				jQuery(".jiayoubao .More").append("收起<b></b>");
+			} else {
+				jQuery(".mOne").addClass('hide');
+				jQuery(".normalPackage").find('li:first').removeClass('hide');
+				jQuery(".normalPackage li").eq(1).removeClass('hide');
+				jQuery(".jiayoubao .More").addClass('guan');
+				jQuery(".jiayoubao .More").html('');
+				jQuery(".jiayoubao .More").append("更多<b class='add'></b>");
+			}
+
+		});
+		
+		jQuery(".prov .More").click(function() {
+			var mores = jQuery(".mTwo");
+			//guan的时候点
+			if (jQuery(".prov .More").hasClass('guan')) {
+				jQuery(mores).each(function(i, more) {
+					if (jQuery(more).hasClass('hide')) {
+						jQuery(more).removeClass('hide');
+					}
+					jQuery(".prov .More").removeClass('guan');
+				});
+				jQuery(".prov .More").html('');
+				jQuery(".prov .More").append("收起<b></b>");
+			} else {
+				jQuery(".mTwo").addClass('hide');
+				jQuery(".pPackage").find('li:first').removeClass('hide');
+				jQuery(".pPackage li").eq(1).removeClass('hide');
+				jQuery(".prov .More").addClass('guan');
+				jQuery(".prov .More").html('');
+				jQuery(".prov .More").append("更多<b class='add'></b>");
+			}
+
+		});
+	</script>
+</body>
+
+
+</html>
+<script type="text/javascript" src="js/recharge.js"></script>
+<script type="text/javascript" src="js/rechargeStyle.js"></script>
+<script type="text/javascript"
+	src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>

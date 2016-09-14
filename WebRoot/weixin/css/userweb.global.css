@@ -1,0 +1,185 @@
+body {font-family: "微软雅黑";}
+
+.relative { position: relative;}
+.btn-right {position: absolute; right: 15px; z-index: 2;}
+.btn-lg2 {height: 55px; line-height: 55px; padding: 0px;}
+
+.btn-primary {color: #fff; background-color: #FFA930;border-color: #FFA930;}
+.btn-primary:active:hover {color: #fff;background-color: #CC7701;border-color: #CC7701;}
+.btn-primary:hover {color: #fff;background-color: #E28502;border-color: #E28502;}
+.btn-primary.focus, .btn-primary:focus {color: #fff;background-color: #E28502;border-color: #905400;}
+.btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled].active, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {background-color: #CCCCCC; border: 1px solid #CCCCCC;}
+
+.btn-red {color: #fff; background-color: #FF684A;border-color: #FF684A;}
+.btn-red:active:hover {color: #fff;background-color: #FF684A;border-color: #FF684A;}
+.btn-red:hover {color: #fff;background-color: #FF684A;border-color: #FF684A;}
+.btn-red.focus, .btn-red:focus {color: #fff;background-color: #FF684A;border-color: #FF684A;}
+.btn-red.disabled, .btn-red.disabled.active, .btn-red.disabled.focus, .btn-red.disabled:active, .btn-red.disabled:focus, .btn-red.disabled:hover, .btn-red[disabled], .btn-red[disabled].active, .btn-red[disabled].focus, .btn-red[disabled]:active, .btn-red[disabled]:focus, .btn-red[disabled]:hover, fieldset[disabled] .btn-red, fieldset[disabled] .btn-red.active, fieldset[disabled] .btn-red.focus, fieldset[disabled] .btn-red:active, fieldset[disabled] .btn-red:focus, fieldset[disabled] .btn-red:hover {background-color: #CCCCCC; border: 1px solid #CCCCCC;}
+
+.btn-pink-circle {color: #FF9924; background-color: #FAEDDA; border-color: #FAEDDA; border-radius: 15px; padding: 4px 16px;}
+.btn-pink-circle:active:hover {color: #FF9924;background-color: #FFECD0;border-color: #FFECD0;}
+.btn-pink-circle:hover {color: #FF9924;background-color: #FFECD0;border-color: #FFECD0;}
+.btn-pink-circle.focus, .btn-pink-circle:focus {color: #FF9924; background-color: #FFECD0; border-color: #FFECD0;}
+
+.btn-gray-circle {color: #999; background-color: white; border-color: #999; border-radius: 15px; padding-left: 15px; padding-right: 15px;}
+.btn-gray-circle:active:hover,
+.btn-gray-circle:hover,
+.btn-gray-circle.focus, .btn-gray-circle:focus {color: #999;background-color: white;border-color: #999;}
+
+.btn-danger {color: #FF4041; background-color: transparent; border-color: transparent; border-radius: 0;}
+.btn-danger:active:hover {color: #FF4041;background-color: transparent;border-color: transparent;}
+.btn-danger:hover {color: #FF4041;background-color: transparent;border-color: transparent;}
+.btn-danger.focus, .btn-danger:focus {color: #FF4041; background-color: transparent; border-color: transparent;}
+
+.btn-checkin,
+.btn-checkin:active:hover,
+.btn-checkin:hover,
+.btn-checkin.focus, .btn-checkin:focus {color: #FF4041; background-color: transparent; border-color: transparent; border-radius: 0; width: 54px;height: 54px; background: url(../images/userweb/sign.png) no-repeat center; background-size: 54px;}
+.btn-checkin.disabled, .btn-checkin.disabled.active, .btn-checkin.disabled.focus, .btn-checkin.disabled:active, .btn-checkin.disabled:focus, .btn-checkin.disabled:hover, .btn-checkin[disabled], .btn-checkin[disabled].active, .btn-checkin[disabled].focus, .btn-checkin[disabled]:active, .btn-checkin[disabled]:focus, .btn-checkin[disabled]:hover, fieldset[disabled] .btn-checkin, fieldset[disabled] .btn-checkin.active, fieldset[disabled] .btn-checkin.focus, fieldset[disabled] .btn-checkin:active, fieldset[disabled] .btn-checkin:focus, fieldset[disabled] .btn-checkin:hover {background: url(../images/userweb/signed.png) no-repeat center; background-size: 54px;}
+
+.btn-more {color: #333;} 
+
+.circle-title {padding: 2px 9px; border: 1px solid #A4A4A4; border-radius: 15px; color: #666;}
+
+.login-menu-wrapper {border-bottom: 1px solid #DDDDDD;}
+
+.login-menu {position: relative; }
+.login-menu>.item {float: left; width: 50%; text-align: center; padding: 10px 5%;}
+.login-menu>.item.active {border-bottom: 4px solid #FFA930;}
+.login-menu>.item.active>a {color: #FFA930;}
+.login-menu>.item>a {padding: 10px 30px; font-size: 14px; color: #333;}
+.login-menu>.item>a:HOVER {text-decoration: none;}
+
+.section {margin-top: 20px;}
+.attribute {border-bottom: 1px solid #EBEBEB; height: 55px; background-color: white; padding-left: 0px; padding-right: 0px;}
+.attribute.first {margin-top: 20px; border-top: 1px solid #EBEBEB;}
+.attribute a {line-height: 55px; }
+.attribute a:HOVER {text-decoration: none;}
+.attribute .title {line-height: 55px;color: #999;font-size: 18px; margin-left: 15px;}
+.attribute .valuesp {line-height: 55px;color: #ffa930;font-size: 18px; margin-right: 15px; top: 0; float: right;top: 0;padding-right: 30px;}
+.attribute .value {line-height: 55px;color: #333;font-size: 18px; margin-right: 15px; width: 35%; position: absolute; right: 0; top: 0;}
+.attribute a.icon .value,
+.attribute a.icon .valuesp {background: url(../images/userweb/arrow.png) no-repeat center right;background-size: 16px;}
+@media (min-width: 768px) {
+.attribute .value {width: 20%;}
+} 
+
+.ipt {border-radius: 0px; border: none; border-bottom: 1px solid #DDD; box-shadow: none;}
+.ipt:focus {border-bottom: 1px solid #DDD;box-shadow: none; -webkit-box-shadow:none;}
+.input-group-addon.ipt {background-color: transparent; color: #9f9f9f;}
+
+.ipt-pink {box-shadow: none; border-color: #FFA930; color: #FF9924;}
+.ipt-pink:focus {box-shadow: none; -webkit-box-shadow:none; border-color: #FFA930;}
+
+.center-header {background-color: #FFA930; height: 260px; color: white; margin:0px auto; }
+.center-header>.userid {line-height: 45px; font-size: 30px;text-align: center; color:#FFFFFF}
+.center-header>.head { line-height: 30px; text-align: center; color:#999999; margin-top:40px;}
+
+.center-mb {border-bottom: 1px solid #EBEBEB; height: 55px; background-color: white;}
+.center-mb>.mb {}
+.center-mb>.mb>a {line-height: 55px;}
+.center-mb>.mb>a:HOVER {text-decoration: none;}
+.center-mb .icon {background: url(../images/userweb/MB.png) no-repeat center left;background-size: 20px;padding-left: 34px;color: #999;font-size: 18px;}
+.center-mb .value {position: absolute;top: 0;right: 15px;color: #333;font-size: 18px;}
+.center-mb .value {background: url(../images/userweb/arrow.png) no-repeat center right;background-size: 16px;padding-right: 44px;}
+
+.center-activity:FIRST-CHILD {}
+.center-activity {border-top: 1px solid #EBEBEB; background-color: white; padding-left: -15px; padding-right: -15px;}
+.center-activity .half {float: left; width: 50%;}
+.center-activity .half:FIRST-CHILD {border-right: 1px solid #EBEBEB;}
+
+.center-footer {color: #999999;background-color: white;border-top: 1px solid #EBEBEB;text-align: center;padding: 5px 0px;font-size: 14px;}
+
+.inf-head {background-color: #FFA930; height: 110px; color: white;}
+.inf-head {background: url(../images/userweb/logo.png) no-repeat center #FFA930;background-size: 64px;}
+
+.mb-head {background-color: white; height: 90px; padding-left: 30px; padding-right: 30px;}
+.mb-head>.title {margin-top: 18px;font-size: 16px;}
+.mb-head>.value {color: #FF8005; font-size: 28px;}
+.mb-head>.rule {position: absolute;right: 30px;bottom: 15px;}
+
+.mb-section {}
+.mb-item {position: relative;background-color: white;margin-top: 15px;margin-left: 15px;margin-right: 15px;padding: 20px;border-radius: 4px;}
+.mb-item.expense {background: url(../images/userweb/pay.png) no-repeat 70% white; background-size: 45px;}
+.mb-item.earning {background: url(../images/userweb/income.png) no-repeat 70% white; background-size: 45px;}
+.mb-item>.subject {}
+.mb-item>.subject>.name {font-size: 18px;}
+.mb-item>.subject>.time {color: #999;}
+.mb-item>.details {position: absolute;width: 12%;top: 20px;right: 20px;}
+.mb-item>.details>.value {font-size: 18px;}
+.mb-item>.details>.unit {color: #999;}
+
+.mb {color: #FF9924;}
+.recommend {background: white; border-radius: 6px; margin: 15px 0px;}
+.recommend>.title {padding: 15px;}
+.recommend>.qrcode {text-align: center;}
+.recommend>.code {text-align: center; font-size: 34px; padding-bottom: 25px; color: #FF9924;}
+.recommend>hr {margin-bottom: 0;}
+
+.order-list {background: white;}
+.order-empty>.empty {text-align: center;}
+.order-list>.order-item { border-bottom: 1px solid #CCC; position: relative; padding: 15px;}
+.order-item>.consumer {}
+.order-item>.consumer>.cellphone {font-size: 16px;}
+.order-item>.consumer>.time {color: #999; font-size: 12px;}
+.order-item>.rule {position: absolute;top:15px;right: 15px; text-align: right;}
+.order-item>.rule>.amount {font-size: 16px;}
+.order-item>.rule>.status {color: #999; font-size: 12px;}
+.order-item>.rule>.status.success {}
+.order-item>.rule>.status.fail {color: #FF5151;}
+.order-item>.rule>.status.ing {color: #8CCE09;}
+.order-footer {position: fixed; bottom: 0px; text-align: center; font-size: 12px; line-height: 1; width: 100%; height: 65px; background-color: #F2F2F2; padding-top: 15px;}
+
+.faq {}
+.faq>h2 {font-size: 18px;}
+.faq>h3 {font-size: 16px;}
+.faq>h4 {font-size: 14px;}
+.faq>h4.circle-title {float: left;}
+.faq>p {font-size: 12px; color: #999999; clear: both;}
+
+.checkin-head {background: url(../images/userweb/4.png) no-repeat 15px center #FFA930; background-size: 64px; padding-left: 94px; height: 90px; color: white; line-height: 90px; font-size: 18px;}
+.checkin-section>.item {background-color: white; color: #666;}
+.checkin-section>.item.current {line-height: 52px;}
+.checkin-section>.item .line {float: left; margin-top: 22px; margin-left: 43px; background: #C2BFBA; width: 6px; height: 6px; border-radius: 50%;}
+.checkin-section>.item.current .line {margin-top: 38px;}
+.checkin-section>.item .body {padding: 15px;margin-left: 45px;border-left: 2px solid #F9F9F9;}
+.checkin-section>.item .rule {float: left;margin-left: 10px;}
+.checkin-section>.item .value {float: left;margin-left: 10px;}
+.checkin-section>.item.current .value {font-size: 24px; color: #333;}
+.checkin-section>.item .operation {float: right; margin-right: 15px;}
+.checkin-section>.item .bygone {float: right; background: url(../images/userweb/tick.png) no-repeat center; background-size: 16px; width: 20px; height: 20px; margin-right: 32px;}
+.check-footer {margin-top: 15px; margin-bottom: 15px;}
+.check-footer>div {line-height: 22px;}
+
+.recharge {background-color: white; padding-top: 15px; border-bottom: 1px solid #EBEBEB;}
+.recharge .help-block {color:#3492E9; padding-left: 20px;margin-top: 9px;}
+.recharge .help-block {background: url(../images/userweb/cancel.png) no-repeat left center; background-size: 16px;}
+.recharge .help-block.cmcc {background: url(../images/userweb/yidong.png) no-repeat left center; background-size: 16px;}
+.recharge .help-block.cucc {background: url(../images/userweb/liantong.png) no-repeat left center; background-size: 16px;}
+.recharge .help-block.ctcc {background: url(../images/userweb/dianxin.png) no-repeat left center; background-size: 16px;}
+.recharge .items {}
+.recharge .items .item {padding-left: 7.5px; padding-right: 7.5px;}
+.recharge .items .item.first {padding-left: 0;}
+.recharge .items .item.last {padding-right: 0;}
+.recharge .items .value {padding: 10px 15px; text-align: center; border-radius: 5px; border: 1px solid #DEDEDE; margin-bottom: 10px;}
+.recharge .items .value.active {background-color: #FFA930; color: white; border-color: #FFA930;}
+
+.recharge-offset {background-color: white; margin-top: 15px; border-bottom: 1px solid #EBEBEB; }
+.recharge-offset>.item {padding: 10px 15px;}
+.recharge-offset>.item,
+.recharge-offset>.item-use {padding-left: 45px;background: no-repeat 15px center;background-size: 20px;}
+.recharge-offset>.item.unchecked {background-image: url(../images/userweb/unchecked.png);}
+.recharge-offset>.item.checked {background-image: url(../images/userweb/checked.png);}
+.recharge-offset>.item>.title {}
+.recharge-offset>.item>.value {margin-left: 15px;color: #999;}
+.recharge-offset>.item-use {padding-top: 10px; padding-right: 15px; padding-bottom: 10px; background-color: #FAFAFA;}
+
+.recharge-help {padding-top: 5px; text-align: right;}
+
+.used-ipt {display: inline;width: 55px;padding: 2px 6px;margin: 0px 5px;font-size: 12px;line-height: 1;height: 24px;border-radius: 2px;}
+
+.recharge-footer {position: fixed;bottom: 0;background-color: white;width: 100%;border-top: 1px solid #CCC;padding: 5px 15px;}
+.recharge-footer>.price {color: #FF4B4B;float: left;}
+.recharge-footer>.price>.value {font-size: 24px;}
+.recharge-footer>.present {color: #FF9924;float: left; margin-left: 25px;padding-top: 9px;}
+.recharge-footer .btn {border-radius : 0px;position: absolute;top: 0;right: 0;height: 44px;width: 35%;}

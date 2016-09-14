@@ -1,0 +1,35 @@
+applicationContext-memcached.xml
+<list>
+	<bean class="java.net.InetSocketAddress">
+		<constructor-arg>
+			<value>127.0.0.1</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value>11211</value>
+		</constructor-arg>
+	</bean>
+</list>
+
+system.properties
+client.visitlog.dir=/home/channel/logs/visit
+
+jdbc.properties
+jdbc.mysql.url=jdbc:mysql://privatetenfenhz.mysql.rds.aliyuncs.com:3306/channel
+
+Constants.java
+public static final String WX_MCH_ID = "1249560601";
+public static final String WX_APP_ID = "wxe1abe2da599ef0f4";
+public static final String WX_APP_SECRET = "0737cf67482b4604ab731f88a97d5bc7";
+public static final String WX_PAY_SECRET = "01f7838fd25549c18150f91e66d9a81c";
+public static final String WX_PAY_CALLBACK = "http://www.gomzone.com/flux/internal/wxpay_callBack.action";
+	
+liuliang.html
+var appid = "wxe1abe2da599ef0f4";
+
+WxPayAction.java
+method:getSign()----url = "http://www.gomzone.com/flux/weixin/liuliang.html";
+
+
+公众号设置：
+js安全域名
+网页帐号-修改-配置授权回调页面

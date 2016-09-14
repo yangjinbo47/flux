@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+
+  <title>购买流量包</title>
+
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/sweetalert.js"></script> 
+<script src="js/json2.js"></script>
+
+<link href="css/bootstrap.css" rel="stylesheet"/>
+<link href="css/sweetalert.css" rel="stylesheet"/>
+<link href="css/userweb.global.css" rel="stylesheet"/>
+<link href="css/button-touch.css" rel="stylesheet"/>
+<script language="javascript">
+window.baseUrl= "http://fm-client-web.mopote.com:80";
+window.cpUser = '1'||'1';
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?81427e09810ac1a598df41bde65b2a42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+
+<style>
+	    
+	    .amount {line-height: 16px; vertical-align: top;}
+	    .amount {color: #FF8B00; font-size: 18px; }
+	    .package {list-style: none; margin: 0; padding: 0; margin-left: -15px; margin-right: -15px; margin-top: 7px;}
+	    .package li {float: left;border: 1px solid #ccc;width: 100px; padding: 5px 0px;margin-left: 15px;margin-bottom: 15px; text-align: center; cursor: default;}
+	    .package li.active {background-color: #FF8B00; color: white; border-color: #FF8B00;}
+	    .bdsug {
+		  display: none;
+		  position: absolute;
+		  z-index: 1;
+		  width: 97%;
+		  background: #fff;
+		  border: 1px solid #ccc;
+		  _overflow: hidden;
+		  box-shadow: 1px 1px 3px #ededed;
+		  -webkit-box-shadow: 1px 1px 3px #ededed;
+		  -moz-box-shadow: 1px 1px 3px #ededed;
+		  -o-box-shadow: 1px 1px 3px #ededed;
+		}
+		
+		.recharge-info {
+		  padding-top: 5px;
+		  text-align: left;
+		}
+		
+		
+			a:link { 
+		  color: #337ab7;
+		text-decoration: none; 
+		} 
+		a:visited { 
+		  color: #337ab7;
+		text-decoration: none; 
+		} 
+		a:hover { 
+		  color: #337ab7;
+		text-decoration: underline; 
+		} 
+		
+		.mouseon{
+     	
+     	background-color: rgb(229,93,66);
+     	}
+     	
+     	.mouseout{
+     	background-color: rgb(255,104,74);
+     	}
+     	#couponsDiv{
+		  background-color: #F7F7F7;
+  		}	
+  		
+  		   		.mask { position: fixed; filter: alpha(opacity=60); background-color: #000; z-index: 1002; opacity:0.5; -moz-opacity:0.5; left: 0; top: 0; right: 0; bottom: 0; display: none;}  
+   		.lisence {position: fixed; top: 0; background-color: white; z-index: 1003; margin: 0px; display: none;}
+   		.lisence>.content {overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; outline: 0;}
+		
+		    .sweet-alert button.cancel {
+      background-color: #FFA930; }
+		      .sweet-alert button.cancel:hover {
+        background-color: #F5A22E; }
+        
+        .sweet-alert button{
+        
+        padding:6px 24px;
+        }
+        #MBBG{
+        background-size: contain;
+		  border-radius: 0;
+		  border: none;
+		  background-position: center center;
+		  background-repeat: no-repeat;
+		    margin: 20px auto;
+  padding: 0;
+  position: relative;
+  box-sizing: content-box;
+        
+        }
+        
+        
+//        .cancel{
+        
+//          width: 114px;
+ //       }
+        
+        #maskAndroid,#maskIos{
+				display:none;
+				position: absolute;
+				background-color: #000000;
+				filter: alpha(opacity=80);
+				opacity: 0.8;
+				overflow: hidden;
+				z-index: 999
+			}
+		.coupons-entity {
+			border-radius: 6px;height: 120px;margin-bottom: 10px; color: white;
+		}
+        .enterprise-name {
+			position: absolute;
+			top: 12px;
+			right: 4%;
+			font-size: 16px;
+		}
+		
+		.name {
+			position: absolute;
+			top: 38px;
+			right: 4%;
+			font-size: 12px;
+		}
+		
+		.expire {
+			position: absolute;
+			left: 32.5%;
+			bottom: 10px;
+			font-size: 12px;
+		}
+		
+		.confine {
+			position: absolute;
+			right: 4%;
+			bottom: 10px;
+			font-size: 12px;
+		}
+		.recharge-footer>.price{
+		height:36px;
+		}
+		.recharge-footer>.present{
+		margin-left: 12px;
+		width: 29%; 
+		height:36px;
+		padding-top:0;
+		 position: relative;
+		}
+		.recharge-footer>.present s.back{
+			color:#666;
+			line-height:36px;
+   	 		
+			font-size:11px;
+		}
+		.recharge-footer>.present s{
+			
+			font-size:11px;
+			color:#666;
+			top: 3px; 
+			position: absolute;
+		}
+		.recharge-footer>.present p{
+			position: absolute;
+   	 		 bottom: 0; 
+			font-size:11px;
+			margin-bottom:0;
+		}
+		.PackageCont .ml.mtwo h3{
+		top:15px;
+		}
+		.recharge-footer{
+		padding:0 15px;
+		height: 45px;
+		}
+		.recharge-footer>.price{
+		height: 45px;
+		line-height: 45px;
+		}
+		.recharge-footer>.present{
+		height: 37px;
+		}
+		.recharge-footer>.present s{
+		top:5px;}
+		</style>
+
+
+
+
+</head>
+<body class="bg">
+<div id="maskAndroid"><img id="maskAndroidImg" src="images/maskAndroid.png" alt="请点这里"></div>
+        <div id="maskIos"><img id="maskIosImg" src="images/maskIos.png" alt="请点这里"></div>
+<div class="Mask Mask1" style="display:none">
+        <b class="close"></b>
+        <img src="images/image_fangli.png" alt="">
+        <h2>订购到账后返利<i id="reward"></i></h2>
+        <p></p>
+        <div class="btnWrap">
+            <input type="button" class="btn1" value="领流量券" id="lo_getCoupons">
+        </div>
+    </div>
+<div class="Mask Mask2">
+        <b class="close"></b>
+        <img src="images/image_success.png" alt="">
+        <h2></h2>
+        <p></p>
+        <div class="btnWrap">
+            <input type="button" class="btn1" value="注册领M币" id="register">
+            <input type="button" class="btn1 clear_r" value="领流量券" id="unlo_getCoupons">
+        </div>
+    </div>
+  <div class="zhezhao"></div>
+  <div class="recharge">
+    <div class="container relative">
+      <p>手机号</p>
+      <div class="inputWrap">
+        <input placeholder="请输入手机号码" id="inputCellPhoneNumber" maxlength="11" type="tel" class="form-control">
+       		<p class="name" id="recharge-message_1"></p>
+		 		
+      </div>
+      <div class="tip">
+        <p>输入要充值的号码，系统会自动适配流量包</p>
+      </div>
+      
+      	  <div id="tabDiv" class="hide">
+	        
+      <table border="0" cellspacing="0" cellpadding="0" class="priceTable">
+	<tr>
+	    <td></td>
+	    <td>150M</td>
+	    <td>500M</td>
+	    <td>1G</td>
+	    <td>2G</td>
+	</tr>
+	<tr class="Pme">
+	    <td>魔品流量</td>
+	    <td>18</td>
+	    <td>27</td>
+	    <td>45</td>
+	    <td>63</td>
+	</tr>
+	<tr>
+	    <td>官方价</td>
+	    <td>20</td>
+	    <td>30</td>
+	    <td>50</td>
+	    <td>70</td>
+	</tr>
+	<tr>
+	    <td>淘宝价</td>
+	    <td>19</td>
+	    <td>28.5</td>
+	    <td>47.5</td>
+	    <td>66.5</td>
+	</tr>
+      </table>
+            上表为部分流量包价格对比，仅供参考！<br>
+      在魔品流量平台订购流量聚划算哦！订购流量还能享受返利哦！<br>
+            </div>
+   
+    </div>
+ 
+        <input  type="hidden" name="cpUser" id="cpUser" value="1"/>		
+		<input  type="hidden" name="cpName" id="cpName" value="魔品流量"/>	
+		
+		<input  type="hidden" name="couponsNaming" id="couponsNaming" value=""/>	
+		
+		<input  type="hidden" name="couponsId" id="couponsId" value=""/>	
+		
+		<input  type="hidden" name="openId" id="openId" value="okBCesx4nO0d1M7L6lJzJvDqeaiM" />
+		
+		<input  type="hidden" name="successOrder" id="successOrder" value=""/>	
+		
+		
+		<input  type="hidden" name="pagecpUser" id="pagecpUser" value="1"/>	
+		<input  type="hidden" name="pageLoginNum" id="pageLoginNum" value="13675837097"/>	
+		<input  type="hidden" name="v" id="v" value="0"/>	
+		
+		
+		<input  type="hidden" name="newSubjectId" id="newSubjectId" value=""/>	
+		
+		<input  type="hidden" name="title" id="title" value=""/>	
+		
+		<input  type="hidden" name="shareDes" id="shareDes" value=""/>	
+		
+		<input  type="hidden" name="logo" id="logo" value="" />
+		
+		
+		<input  type="hidden" name="fanMBSave" id="fanMBSave" value="" />
+		<input type="hidden" name="resourceType" id="resourceType" value="" />
+
+<div class=" container">
+<div class="ModWrap"> 
+   <div class="modPackage hide"> 
+    <div class="allTejia">
+      <div class="PackageTit">
+		  <span class="fl">特价包<i class=" cL3">超值特惠</i></span>
+	  </div>
+	  <ul class="PackageCont">
+	     <li class="mTwo">
+	    
+	     </li>
+	  </ul>
+	</div>  
+	<div class="jiayoubao">
+	  <div class="PackageTit" >
+	     <span class="fl">流量加油包<i class=" cL2">当月有效</i></span>
+		 <span class="fr More guan  cL2" >更多<b class="add"></b></span>
+	  </div>
+	  <ul class="PackageCont normalPackage">  
+	  <li class="mOne">
+	  </li>
+	  </ul>
+	</div>
+   </div>    	
+</div>
+</div>
+</div>
+   	    <div class="nav_a hide" id="nav_a">
+		<p>订购特价包时，将无法用流量券和M币抵扣</p>
+	</div>
+		
+	
+	
+		<div class="notTejia">
+							<div class="recharge-offset" id="couponsDiv">
+			<div class="item unchecked hide" id="coupons" style="width: 72%; float: left; background-color: #fFFFFF;">
+				<span class="title"><span id="bestCouponsName">0元流量券</span><span class='hide couponTip'>（不返M币）</span><span class="value hidden">抵扣￥<span style="color: #FF4B4B;" id="couponsDJ">0</span><span style="color: #FF4B4B;">元</span><span id="GM" class="hide"></span></span>
+				
+				<span class="hide" id="selectCouponsId"></span>
+			</div>
+			<div class="item unchecked" id="Nocoupons" style="width: 72%; float: left; background-color: #fFFFFF;">
+				<span class="title">流量券</span>
+			</div>
+			<div id="coupons_right" style="text-align: right; width: 28%; float: right;padding: 10px 10px 10px 0px; background-color: #fFFFFF;">
+ 				 <a href="javascript:;" onclick="showUsableCoupons()">可用<span id="couponsUsable">0</span>张</a>
+			</div> 
+		</div>	
+		<div style="clear:both;"></div>
+		<div id="MBDiv" class="recharge-offset" style="margin-top: 0px;border-top: 1px solid #EBEBEB;">
+					<div class="item unchecked" id="MB">
+				<span class="title">M币</span><span class="value">可用<span id="mbUsable">0</span>M币</span><span class="hide" id="mbtip">（按实付金额返M币）</span>
+			</div>
+			<div class="item-use unchecked hide" id="userMBdiv">
+				<span>使用<input class="form-control used-ipt" id="useMB" type="tel" style="text-align: center;">M币<span class="hidden">，抵扣￥<span class="value" id="rmb">0.00</span></span></span><span></span>
+			</div>
+		</div>
+</div>
+		<div class="container">
+		<div class="showWrap cL1 hide" id="dginfo">
+			<div class="fl" style="text-align: left;">
+				<a href="javascript:;" onclick="dgInfo()">订购须知</a>
+			</div>
+			<div class=" fr">
+				<a href="javascript:;" onclick="showWhatIsMB()">什么是M币？</a>
+			</div>
+			</div>
+		</div>
+		
+	
+	
+    <div id="yyImage" class="container center-footer" style="margin-top:50px; margin-bottom:25px; background-color: #F2F2F2; border-top: 0px solid #EBEBEB;">
+			<div style="clear:both;"><span  style="font-size: 8px;">由魔品流量提供技术支持  运营商官方授权合作商</span></div>
+		    <div style="width:60%;MARGIN-RIGHT: 20%; MARGIN-LEFT:  20%;" >
+			     <img width="100%" src="images/yysLOGO.png">
+		   </div>
+	</div>
+	
+	<div id="infomationYD" class="hide container recharge-info" style="margin-bottom:60px;">
+			<P>1、订购特价包时，无法使用M币和流量券进行抵扣。</P>
+            <P>2、非魔品流量注册用户订购时无法使用M币和流量券抵扣，不享受返利。</P>
+			<P>3、订购特价包，因运营商缘故，话费和流量到账会有延迟，话费最迟到账3-7个工作日。</P>
+			<P>4、所订购的包体如果长时间未到账，可以联系客服。</P>
+			<P>5、订购失败，系统会安排退款处理。</P>
+			<P>6、用户不存在、即此号码为空号不能订购，已停机用户、黑名单用户不能订购。</P>
+			<P>7、用户状态异常（资料不全或资料与实际信息不符）情况下也不能订购。</P>
+			<P>8、移动流量到账时间为48小时，运营商系统出问题可能会导致充值失败，可重新充值。</P>
+			<P>9、大部分省份流量包当月有效次月失效，部分手机号码设有灵活账期，以号码账期为准。</P>
+			<P>10、全国移动小面值流量支持除广西移动外的所有省份，山东充值比较慢。</P>
+			<P>11、流量包可与其他流量叠加使用，可多次叠加。</P>
+			<P>12、充值成功后有短信提醒，在月初月末充值高峰期，可能会有短信延迟现象.</P>
+			<P>13、非魔品流量注册用户可登陆网上营业厅、掌上营业厅、以及拨打运营商电话查询，注册用户可以直接登录魔品流量钱包查询订单记录。</P>
+
+		</div>
+		<div id="infomationLT" class="hide container recharge-info" style="margin-bottom:60px;">
+			<P>1、订购特价包时，无法使用M币和流量券进行抵扣。</P>
+			<P>2、非魔品流量注册用户订购时无法使用M币和流量券抵扣，不享受返利。</P>
+			<P>3、订购特价包，因运营商缘故，话费和流量到账会有延迟，话费最迟到账3-7个工作日。</P>
+			<P>4、所订购的包体如果长时间未到账，可以联系客服。</P>
+			<P>5、订购失败，系统会安排退款处理。</P>
+			<P>6、部分用户套餐不支持订购流量业务，已停机用户不能订购。</P>
+			<P>7、用户状态异常（资料显示不完全、或与实际信息不符）不能订购。</P>
+			<P>8、非实名认证用户，黑名单用户不能订购。</P>
+			<P>9、用户当月订购流量包已到达叠加上限、同一号码同一流量面值当月最多仅限订购3次，超出3次将会订购失败，其他面值可以订购。</P>
+			<P>10、全国联通产品2G用户部分省份被关闭订购。</P>
+			<P>11、充值完成后请以短信为准，由于运营商系统原因可能导致到账缓慢，以短信为准，防止出现流量包之外的费用。</P>
+			<P>12、流量长时间未到可打电话咨询客服或者运营商。</P>
+
+		</div>
+		<div id="infomationDX" class="hide container recharge-info" style="margin-bottom:60px;">
+			<P>1、订购特价包时，无法使用M币和流量券进行抵扣。</P>
+			<P>2、非魔品流量注册用户订购时无法使用M币和流量券抵扣，不享受返利。</P>
+			<P>3、订购特价包，因运营商缘故，话费和流量到账会有延迟，话费最迟到账3-7个工作日。</P>
+			<P>4、所订购的包体如果长时间未到账，可以联系客服。</P>
+			<P>5、订购失败，系统会安排退款处理。</P>
+			<P>6、用户不存在、即此号码为空号则不能订购，欠费已停机用户不能订购。</P>
+			<P>7、资料不全或资料与实际信息不符不能订购。</P>
+			<P>8、套餐变更，当月不能订购；未办实名认证用户流量充值失败率较高。</P>
+			<P>9、天翼无线宽带套餐、时长计费用户不能订购，业务办理受限用户不能订购：广东、江西、辽宁、江苏、湖南、安徽、北京、浙江。</P>
+			<P>10、天翼无线宽带套餐、易通卡套餐、时长计费用户不能订购。</P>
+			<P>11、天翼无线宽带套餐、009套餐、随意卡、大众卡、6分卡、8分卡、易通卡、GGMM卡、灵通、卡式话机的用户不能订购。</P>
+			<P>12、天翼无线宽带套餐、时长计费用户、飞YOUNG（年轻群体）套餐19元档、39元档、乐享3G上网版/聊天版129元版及以上套餐、联通老套餐不能订购，欠费停机或名下存在欠费产品的用户不能订购。</P>
+			<P>13、天翼无线宽带套餐、时长计费用户、T2单产品套餐（不含一卡双芯）、天翼6分卡套餐、总机服务-本地纯帐务型VPN套餐或GPS设备分期服务费、飞Young纯流量19元套餐、积木套餐不能订购。</P>
+			<P>14、全国移动充值失败大部分原因为落地方处理失败（也就是省电信系统因为系统繁忙未及时处理该笔订单），故该笔订单将会滞留，时间长即会自动视为失败。</P>
+			<P>15、部分省份针对特殊套餐类型也将不能订购后项流量业务，故会产生订购失败。</P>
+			
+		
+		</div>
+	
+				<div class="hide" id="naming" style="position: fixed; bottom: 0; width:100% ;height:73px;background-color: #fFFFFF;">
+			<div style="  padding-top: 1%;">
+			<span id="couponsName" style=" color: #FFAA50; font-size: 17px;  padding-left: 13px;">魔品流量</span><span  class="value" style="color: #999;">已帮你支付<span id="payByAnother">0</span>元</span>
+			
+			</div>
+		</div>
+				<div class="recharge-footer hide" id ="btn-footer">
+			<div class="price">￥<span class="value" id="amount">0</span></div>
+						<div class="present" id="present"><s></s ><p>返<span id="fanMB"></span>M币</p></div>
+						<div class="button">
+				<button type="button" class="btn btn-red" id="btnConfirmRecharge" data-loading="正在充值" disabled>立即充值</button>
+			</div>
+		</div>
+		
+		
+		<div class="lisence modal-content" style="height: 100%;width:100% ; background-color: rgb(222, 222, 222);">
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="hideUsableCoupons()"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" style="text-align: center;">我的流量券</h4>
+		    </div>
+			<div class="modal-body content" style="height: 85%;width:100% ;">
+							</div>
+		</div>
+		
+		
+		<div id="mask" class="mask" style="display: none;"></div>
+		
+		<div class="container">
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">订单状况</h4>
+				</div>
+				<div class="modal-body" id="orderResult"
+					style="word-wrap: break-word;"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">好的，我知道了</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="WhatIsMB" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				 <div id="test" class="modal-body" style="word-wrap: break-word;">
+     			      <h4 id="text-in-a-modal"></h4>
+		 		 <p>1：M币是魔品流量平台流通的虚拟货币，可以通过充值返利、任务、活动获得。</p>
+		 		  <p>2： M币可以用于商城兑奖、流量订购抵扣等。</p>
+    		  </div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+<script src="js/global.js"></script> 
+<script src="js/mopote.lib.js"></script> 
+<script src="js/mopote.lib.ui.button.js"></script> 
+<script src="js/noty.js"></script> 
+<script src="js/jquery-util.js?v=2015090100"></script> 
+<script src="js/wx-fen-xiang.js?v=2016011200"></script> 
+<script src="js/common.js"></script> 
+<script src="js/wx-share.js"></script> 
+		
+		<script language="javascript">
+					
+
+document.getElementById("maskAndroid").onclick = function(){this.style.display = "none";}
+document.getElementById("maskIos").onclick = function(){this.style.display = "none";}
+					$J(".selectAble").click(function() {
+			
+						var id=$J(this).attr("name");
+						$J("#GM").html($J("#payNaming"+id).html());
+						$J("#bestCouponsName").html($J("#couponsName"+id).html());
+						$J("#couponsDJ").html($J("#freeFee"+id).html());
+						$J("#selectCouponsId").html($J("#couponsId"+id).html());
+						
+						if ($J("#coupons").hasClass('checked')) {
+							$J("#coupons").removeClass('checked').addClass(
+							'unchecked');
+						}
+						
+						$J("#coupons").click();
+						hideUsableCoupons();
+			
+					});
+					
+					
+					function showUsableCoupons(){
+						$J("#mask").fadeIn();
+						$J('.lisence').show();
+					}
+					function hideUsableCoupons() {
+						$J("#mask").fadeOut();
+						$J('.lisence').hide();
+					}
+					
+					function hideMBReturn(){
+					sweetAlert.close();
+					}
+					
+					var appid ="wxb3343546b5bfaa1c";
+					
+					
+					
+										
+				function isAndroid(){
+			var u = navigator.userAgent;
+			var app = navigator.appVersion;
+			var isAndroid = u.indexOf('Android') > -1; //android终端
+			var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+			return isAndroid;
+				}
+					
+					function showWhatIsMB(){
+				//var obj=$J('#WhatIsMB');
+				//	obj.modal({});
+					
+					swal({   title: "",   text: "<div style='text-align:left;'><p>1：M币是魔品流量平台流通的虚拟货币，可以通过充值返利、任务、活动获得。</p> <p>2：M币可以用于商城兑奖、流量订购抵扣等。</p> </div>",   html: true });
+					
+					//swal('1：M币是魔品流量平台流通的虚拟货币，可以通过充值返利、任务、活动获得。2：M币可以用于商城兑奖、流量订购抵扣等。')
+					}
+						
+					function dgInfo(){
+			yyImage
+					//var msgInfo=$J("#recharge-message_1").html();
+					var msgInfo=$J(".name").html();
+					if(msgInfo.indexOf("移动")>-1){
+						$J("#yyImage").addClass('hide'); 
+						$J("#infomationLT").addClass('hide'); 
+						$J("#infomationDX").addClass('hide'); 
+						if($("#infomationYD").hasClass('hide')){
+							$J("#infomationYD").removeClass('hide'); 
+						}else{
+							$J("#infomationYD").addClass('hide'); 
+							$J("#yyImage").removeClass('hide'); 
+						}
+					}else if(msgInfo.indexOf("联通")>-1){
+						$J("#yyImage").addClass('hide'); 
+						$J("#infomationYD").addClass('hide'); 
+						$J("#infomationDX").addClass('hide'); 
+						if($("#infomationLT").hasClass('hide')){
+							$J("#infomationLT").removeClass('hide'); 
+						}else{
+							$J("#infomationLT").addClass('hide'); 
+							$J("#yyImage").removeClass('hide'); 
+						}
+					
+					}else if(msgInfo.indexOf("电信")>-1){
+						$J("#yyImage").addClass('hide'); 
+						$J("#infomationYD").addClass('hide'); 
+						$J("#infomationLT").addClass('hide'); 
+						if($("#infomationDX").hasClass('hide')){
+							$J("#infomationDX").removeClass('hide'); 
+						}else{
+							$J("#infomationDX").addClass('hide'); 
+							$J("#yyImage").removeClass('hide'); 
+						}
+					}else {
+					swal("请先输入规范的手机号码！");
+					
+					}
+
+					}	
+						
+				function createCoupons() {
+				    $J("#maskAndroidImg").attr('src',"http://fm-client-web.mopote.com:80/images/userweb/coupons/maskAndroid.png"); 
+                    $J("#maskIosImg").attr('src',"http://fm-client-web.mopote.com:80/images/userweb/coupons/maskIos.png");
+                
+                    if(isAndroid()){//客户端是安卓
+                        jQuery('#maskAndroid').css({
+                            "height": function () { return jQuery(document).height(); },
+                            "width": function () { return jQuery(document).width(); }
+                        });
+                        jQuery('#maskAndroidImg').css({
+                            "width": function () { return jQuery(document).width(); }
+                        });
+        
+                        jQuery('#maskAndroid').show();
+                    }else{
+                        jQuery('#maskIos').css({
+                            "height": function () { return jQuery(document).height(); },
+                            "width": function () { return jQuery(document).width(); }
+                        });
+                        jQuery('#maskIosImg').css({
+                            "width": function () { return jQuery(document).width(); }
+                        });
+        
+                        jQuery('#maskIos').show();
+                    }
+				}
+						
+			 window.baseUrl = "";
+			$J(document).ready(function() {
+				initPage();
+				var form=document.form;
+			});
+			var createSubjectsuccess = {
+			
+				fn:function(json){
+					var Flag = json.Flag;
+					if (Flag != null && Flag == 0) {
+					$J("#newSubjectId").val(json.Data.newSubjectId);
+					$J("#title").val(json.Data.title);
+					$J("#shareDes").val(json.Data.shareDes);
+					$J("#logo").val(json.Data.logo);
+					}
+					initPage();
+					
+					                	$(".zhezhao").show();
+                    $(".Mask1").show();
+                    $("body").css("position","fixed");
+                    $J("#lo_getCoupons").click(createCoupons);
+                    if($J("#resourceType").val()=="1"){
+                        $(".Mask1").children("p").html('特价包订购成功，预计30分钟内到账，由于运营商缘故流量和话费到账会有延迟，如遇长时间未到账，请联系客服：<a href="tel:4006265070">400-626-5070</a>');
+                        if($J("#fanMBSave").val() > 0) {
+                            $(".Mask1").children("h2").html('订购到账后返利<i>'+$J("#fanMBSave").val()+'M币</i>');
+                        } else {
+                            $(".Mask1").children("h2").html('特价包订购成功');
+                        }
+                    } else {
+                        $(".Mask1").children("p").html('预计1分钟内到账，请查收短信</br>如遇长时间未到账，请联系客服：<a href="tel:4006265070">400-626-5070</a>');
+                        if($J("#fanMBSave").val() > 0) {
+                            $(".Mask1").children("h2").html('订购到账后返利<i>'+$J("#fanMBSave").val()+'M币</i>');
+                        } else {
+                            $(".Mask1").children("h2").html('流量订购成功');
+                        }
+                    }
+                						
+					
+				}
+			
+			}
+		
+			
+	 function pay(option) {
+  
+        wx.chooseWXPay({
+        	appid:appid,
+            timestamp: option.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的
+            //支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+            nonceStr: option.nonceStr, // 支付签名随机串，不长于 32 位
+            package: option.packageValue, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+            paySign: option.paySign, // 支付签名
+            success: function (e) {
+                // 支付成功后的回调函数
+                _selected=null;
+                
+                var body = $J("<div></div>");
+                var remind='';
+                var messageinfo='';
+                if (e.errMsg.indexOf("ok")!=-1) {
+                	$J("#fanMBSave").val($J('#fanMB').html());
+                	 remind = $J('<div class="remind well" style="font-size:12px; line-height: 20px;">');
+					remind.append('<i class="glyphicon glyphicon-info-sign icon"></i>');
+					remind.append('<span class="text" style="display: inline-block; margin-bottom: 15px;">流量充值订单提交成功</span>');
+					remind.append('<ul style="padding-left: 20px;">'+
+							'<li>订单处理中，预计10分钟内到账，请查收短信。</li>'+
+							'<li>如遇长时间未到账，请联系客服：400-626-5070</li>'+
+					'</ul>');
+					//发起ajax请求
+                		var createSubjecturl = "http://fm-client-web.mopote.com:80/userWxPay/createSubject";  
+						var param = {
+						
+							orderId:$J('#successOrder').val()					
+						};
+						if (window.cpUser) {
+							param.cpUser = window.cpUser;
+						}
+					   ajaxRequest(createSubjecturl, param ,createSubjectsuccess,timeoutFunction);
+                	
+                } else {
+                	 remind = $J('<div class="remind well" style="font-size:12px; line-height: 20px;">');
+					remind.append('<i class="glyphicon glyphicon-info-sign icon"></i>');
+					remind.append('<span class="text" style="display: inline-block; margin-bottom: 15px;">流量充值订单提交失败</span>');
+					remind.append('<ul style="padding-left: 20px;">'+
+							'<li>支付失败,请重新支付!</li>'+
+					'</ul>');
+					messageinfo="支付失败,请重新支付!"
+					swal("支付失败,请重新支付!");
+                }
+            	//body.append(remind);
+				//$J('#orderResult').empty();
+				//$J('#orderResult').append(body);
+				//$J('#myModal').modal({});
+                //location.href = option.returnUrl;
+                $J("#package").find(".item .value").removeClass(
+								"active");
+    			$J('#amount').text('0');
+    			$J('#fanMB').html(0);
+    			$J("#MB").unbind();
+				if ($J("#MB").hasClass('checked')) {
+				$J("#MB").removeClass('checked').addClass(
+				'unchecked');
+				
+				}
+    			$J("#useMB").val("");
+				$J("#userMBdiv").addClass('hide');
+				$J("#rmb").html("0.00");
+				$J("#btnConfirmRecharge").prop("disabled", true);
+				if($J("#coupons").hasClass('checked')){
+					$J("#coupons").removeClass('checked').addClass(
+										'unchecked');
+				}
+				$J("#coupons").unbind();
+				if (!$J("#naming").hasClass('hide')) {
+				$J("#payByAnother").html('0');
+				$J("#couponsNaming").val('');
+				$J("#naming").addClass('hide');
+				}
+				
+               // alert(messageinfo);
+            }
+        });
+    };
+    
+	
+	
+			
+			
+function initPage() {
+		
+	var success = {
+	fn:function(data,status){
+    	
+    	wx.config({
+    	          debug: false,
+    	          appId: appid,
+    	          timestamp:data.timestamp,
+    	          nonceStr:data.nonceStr,
+    	          signature:data.signature,
+    	          jsApiList: [
+    	          'chooseWXPay',
+    	          'openLocation',
+    	          'showAllNonBaseMenuItem',
+    	          'checkJsApi',
+    	          'onMenuShareTimeline',
+    	          'onMenuShareAppMessage'
+    	          ]
+    	      });
+    	wx.ready(function(){
+
+			var newSubject=$J("#newSubjectId").val();
+			var imgUrl = "http://pdl.elevensky.net/www/TMP/mailiuliang/webrecharge.png";
+			var lineLink = "http://fm-client-web.mopote.com:80/share/share_newyear?cpUser=1&friendRecommendCode=99KGG6";
+			var descContent = "为五一假期装好备！";
+			var shareTitle = "放胆去玩，手机流量不够？ 立即充值 ！";		
+			if(newSubject!=null&&newSubject!=''&&newSubject!='undefined'&&newSubject!=undefined){
+				imgUrl=$J("#logo").val();
+				lineLink="http://fm-client-web.mopote.com:80/coupons/enterSubject?subjectId="+newSubject+"&cpUser=1";
+				descContent=$J("#shareDes").val();
+				shareTitle=$J("#title").val();
+			}
+			
+    		wx.onMenuShareAppMessage({
+			    title: shareTitle, // 分享标题
+			    desc: descContent, // 分享描述
+			    link: lineLink, // 分享链接
+			    imgUrl: imgUrl, // 分享图标
+			    type: '', // 分享类型,music、video或link，不填默认为link
+			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			    success: function () { 
+				// 用户确认分享后执行的回调函数
+			    },
+			    cancel: function () { 
+				// 用户取消分享后执行的回调函数
+			    }
+			});
+			
+			
+			
+			 wx.onMenuShareTimeline({
+    		    title: shareTitle, // 分享标题
+			    link: lineLink, // 分享链接
+			    imgUrl:imgUrl, // 分享图标
+    		    success: function () { 
+    		        // 用户确认分享后执行的回调函数
+    		    },
+    		    cancel: function () { 
+    		        // 用户取消分享后执行的回调函数
+    		    }
+    		});
+			
+    	});
+		   }
+	};
+		var queryurl = "getSign.json";  
+		var param = {
+				url : (location.href.split('#')[0]).replace(":80", "")
+		};
+		if (window.cpUser) {
+			param.cpUser = window.cpUser;
+		}
+		jQuery.post(queryurl,function(data){
+			alert(data);
+		},function(e){
+		alert(e);})
+   ajaxRequest(queryurl, param ,success,timeoutFunction)
+   }
+
+        jQuery("#register").click(function(){
+           window.location="/userweb/index?cpUser=1";
+        });
+        
+        
+      jQuery(".More").click(function(){jQuery
+    	  
+    	  var mores = jQuery(".mOne");
+    	  //guan的时候点
+    	  if(jQuery(".More").hasClass('guan')){
+    		  jQuery(mores)
+              .each(
+                      function(i, more) {
+        	  if(jQuery(more).hasClass('hide')){
+        		  jQuery(more).removeClass('hide');
+          	}
+        	  jQuery(".More").removeClass('guan');
+          });
+    		  jQuery(".More").html('');
+    		  jQuery(".More").append("收起<b></b>");
+    	  }else{
+    		  jQuery(".mOne").addClass('hide');
+          	jQuery(".normalPackage").find('li:first').removeClass('hide');
+          	jQuery(".normalPackage li").eq(1).removeClass('hide');
+          	jQuery(".More").addClass('guan');
+          	jQuery(".More").html('');
+          	jQuery(".More").append("更多<b class='add'></b>");
+    	  }
+    	
+      }); 
+		</script>
+	
+		
+  </body>
+
+
+</html>  
+<script type="text/javascript" src="js/recharge2.js"></script> 
+<script type="text/javascript" src="js/rechargeStyle.js"></script>
+ <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+  

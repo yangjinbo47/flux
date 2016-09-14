@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- internal相关 -->
+	<package name="internal" namespace="/internal" extends="default">
+	    <!-- 微信支付相关 -->
+		<action name="wxpay_*" method="{1}" class="com.tenfen.www.action.internal.WxPayAction"></action>
+		
+		<!-- 业务 -->
+		<action name="business_*" method="{1}" class="com.tenfen.www.action.internal.BusinessAction">
+		    <result name="orderInfo">/weixin/jsp/orderInfo.jsp</result>
+		</action>
+	</package>
+
+</struts>

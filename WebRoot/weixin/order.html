@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+<title>订单列表</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/sweetalert.js"></script>
+<script src="js/json2.js"></script>
+
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/sweetalert.css" rel="stylesheet" />
+<link href="css/userweb.global.css" rel="stylesheet" />
+<link href="css/button-touch.css" rel="stylesheet" />
+<style>
+body {
+	background-color: #F2F2F2;
+	padding-bottom: 65px;
+}
+</style>
+<script src="js/global.js"></script>
+<script src="js/mopote.lib.js"></script>
+<script src="js/mopote.lib.ui.button.js"></script>
+<script src="js/noty.js"></script>
+<script src="js/jquery-util.js?v=2015090100"></script>
+<script src="js/wx-fen-xiang.js?v=2016011200"></script>
+<script src="js/common.js"></script>
+<script src="js/wx-share.js"></script>
+
+<link href="css/commom.css" rel="stylesheet" />
+</head>
+<body class="bg">
+	<nav class="navType-h">
+		<input type="hidden" name="cpUser" id="cpUser" value="1" />
+
+		<div class="navStyle-b ">
+			<div class="itemorder navStyle-d">
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<a class="btn-more" href="javascript:;" id="queryMore">点击查看更多</a>
+		</div>
+		<div class="container order-footer relative">
+			<p>若流量超过48小时未到账，请联系客服400-888-8888</P>
+		</div>
+	</nav>
+	<input type="hidden" name="pageNo" id="pageNo" value="1" />
+</body>
+</html>
+<script type="text/javascript">
+	$J(document).ready(function() {
+		initPage();
+		$J('#queryMore').bind('click', function() {
+			queryMore();
+		});
+	});
+	
+	function initPage() {
+		var pageNo = 1;
+		var url = "../internal/business_orderlist.action";
+		var param = {
+			pageNo : pageNo
+		};
+		var success = {
+			fn : function (data, status) {
+				
+				var data = data.Data;
+				var retCode = data.retCode;
+				var errorMsg = data.errorMsg;
+				if(retCode==0){
+					var page = data.page;
+					var result = page.result;
+					if(result.length == 0){
+						swal("没有更多了");
+					}else{
+						$J(result).each(function(i, item) {
+							var text ='';
+							text +='<div class="itemorder navStyle-d">';
+							text +='<a href="../internal/business_orderInfo.action?orderId=' + item.orderId + '">';
+							text +='<ul class="orderList">';
+							text +='<li>';
+							text +='<span>'+item.msisdn+'</span>';
+							text +='<span class="s_txt">'+item.timeStr+'</span>';
+							text +='</li>';
+							text +='<li>';
+							text +='<span>' + item.subject+'</span>';
+							
+							if(item.status==0){
+								text +='<span class="s_txt c_1">充值成功</span>';
+							}
+							else if(item.status==1){
+								text +='<span class="s_txt c_3">充值中</span>';
+							}
+							else if(item.status==2){
+								text +='<span class="s_txt c_2">失败未退款</span>';
+							}
+							else if(item.status==2001){
+								text +='<span class="s_txt c_2">失败退款中</span>';
+							}
+							else if(item.status==2002){
+								text +='<span class="s_txt c_2">失败已退款</span>';
+							}
+							
+							text +='</li>';
+							text +='<li>';
+							text +='<p>￥'+item.fee/100+'</p>';
+							text +='</li>';
+							text +='</ul>';
+							text +='</a>';
+							text +='</div>';
+							$J(".itemorder:last").after(text);	
+		           		});
+	           			
+	           			$J("#pageNo").val(page.pageNo);
+					}
+				}else{
+					swal(errorMsg);
+				}
+					  
+			}
+		};
+		ajaxRequest(url, param, success,timeoutFunction);
+	}
+	
+	function queryMore(){
+		var pageNo = parseInt($J("#pageNo").val()) + 1;
+		var url = "../internal/business_orderlist.action";
+		var param = {
+			pageNo : pageNo
+		};
+		var success = {
+			fn : function (data, status) {
+				
+				var data = data.Data;
+				var retCode = data.retCode;
+				var errorMsg = data.errorMsg;
+				if(retCode==0){
+					var page = data.page;
+					var result = page.result;
+					if(result.length == 0){
+						swal("没有更多了");
+					}else{
+						$J(result).each(function(i, item) {
+							var text ='';
+							text +='<div class="itemorder navStyle-d">';
+							text +='<a href="../internal/business_orderInfo.action?orderId=' + item.orderId + '">';
+							text +='<ul class="orderList">';
+							text +='<li>';
+							text +='<span>'+item.msisdn+'</span>';
+							text +='<span class="s_txt">'+item.createTime+'</span>';
+							text +='</li>';
+							text +='<li>';
+							text +='<span>' + item.subject+'</span>';
+							
+							if(item.status==0){
+								text +='<span class="s_txt c_1">充值成功</span>';
+							}
+							else if(item.status==1){
+								text +='<span class="s_txt c_3">充值中</span>';
+							}
+							else if(item.status==2){
+								text +='<span class="s_txt c_2">失败未退款</span>';
+							}
+							else if(item.status==2001){
+								text +='<span class="s_txt c_2">失败退款中</span>';
+							}
+							else if(item.status==2002){
+								text +='<span class="s_txt c_2">失败已退款</span>';
+							}
+							
+							text +='</li>';
+							text +='<li>';
+							text +='<p>￥'+item.fee/100+'</p>';
+							text +='</li>';
+							text +='</ul>';
+							text +='</a>';
+							text +='</div>';
+							$J(".itemorder:last").after(text);	
+		           		});
+	           			
+	           			$J("#pageNo").val(page.pageNo);
+					}
+				}else{
+					swal(errorMsg);
+				}
+					  
+			}
+		};
+		ajaxRequest(url, param, success,timeoutFunction);
+	}
+</script>

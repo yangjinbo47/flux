@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+	<title>订单列表</title>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/sweetalert.js"></script> 
+<script src="js/json2.js"></script>
+
+<link href="css/bootstrap.css" rel="stylesheet"/>
+<link href="css/sweetalert.css" rel="stylesheet"/>
+<link href="css/userweb.global.css" rel="stylesheet"/>
+<link href="css/button-touch.css" rel="stylesheet"/>
+<script language="javascript">
+window.baseUrl= "http://fm-client-web.mopote.com:80";
+window.cpUser = '1'||'';
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?81427e09810ac1a598df41bde65b2a42";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>		<style>
+		body {background-color: #F2F2F2; padding-bottom: 65px;}
+		</style>
+<script src="js/global.js"></script> 
+<script src="js/mopote.lib.js"></script> 
+<script src="js/mopote.lib.ui.button.js"></script> 
+<script src="js/noty.js"></script> 
+<script src="js/jquery-util.js?v=2015090100"></script> 
+<script src="js/wx-fen-xiang.js?v=2016011200"></script> 
+<script src="js/common.js"></script> 
+<script src="js/wx-share.js"></script> 
+		
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+		<script language="javascript">
+			var appid ="wxb3343546b5bfaa1c";
+			var lineLink = "http://fm-client-web.mopote.com:80/share/share_newyear?cpUser=1&friendRecommendCode=99KGG6";
+			var queryurl = "getSign.json"; 
+			initPage(lineLink,queryurl,null,null,null);
+		</script> 
+	
+	<link href="css/commom.css" rel="stylesheet"/>
+</head>
+<body class="bg">
+	<nav class="navType-h">
+	<input type="hidden" name="cpUser" id="cpUser" value="1"/>
+	
+			<div class="navStyle-b ">
+				<div class="itemorder navStyle-d">
+			<a href="/userOrder/queryOrderInfo?orderId=U20160702134320193">
+				<ul class="orderList">
+					<li>
+						<span>13675837097</span>
+						<span class="s_txt">07-02 13:43</span>
+					</li>
+					<li>
+					 						 	<span>移动10M</span>
+					 							
+											 	<span class="s_txt c_3">充值处理中</span>
+					 						</li>
+					<li>
+																		<p>￥2.85</p>
+																	</li>
+				</ul>
+			</a>
+			</div>
+			</div>
+		<div style="text-align: center;">
+			<a class="btn-more" href="javascript:;" id="queryMore">点击查看更多</a>
+		</div>
+		<div class="container order-footer relative">
+			<p>若流量长时间未到账，请<a href="/userOrder/faq?cpUser=1">查看原因</a>了解</p>
+			<p>若流量超过48小时未到账，请联系客服400-626-5070</P>
+		</div>
+	</nav>
+	<input type="hidden" name="pageNo" id="pageNo" value="1"/>
+</body>
+</html>
+<script type="text/javascript">
+	$J(document).ready(function() {
+		$J('#queryMore').bind('click', function() {
+			queryMore();
+		});
+	});
+	
+	window.onpopstate = function(){
+    $J("#pageNo").val(1);
+}
+	function queryMore(){
+		var pageNo = parseInt($J("#pageNo").val()) + 1;
+		var url = "/userOrder/queryMoreOrderList?cpUser=1&pageNo="+pageNo;
+		var param = {};
+		var success = {
+			fn : function (result, data) {
+				
+				var data = result.Data;
+				var retCode = data.retCode;
+				var errorMsg = data.errorMsg;
+				if(retCode==0){
+					var page = data.page;
+					var result = page.result;
+					if(result.length == 0){
+						swal("没有更多了");
+					}else{			
+						$(result).each(function(i, item) {
+							var text ='';
+							text +='<div class="itemorder navStyle-d">';
+							text +='<a href="/userOrder/queryOrderInfo?orderId=' + item.orderId + '">';
+							text +='<ul class="orderList">';
+							text +='<li>';
+							text +='<span>'+item.mobileNum+'</span>';
+							text +='<span class="s_txt">'+item.createTimeDesc.substring(5)+'</span>';
+							text +='</li>';
+							text +='<li>';
+							if(item.type==0){
+								text +='<span>' + item.rangeOpName +item.amountView+'</span>';
+							}else{
+								text +='<span>' + item.niceName+'</span>';
+							}
+							
+							
+							if(item.status==1){
+								if(item.type==1){//买一增一类型订单
+									if(item.bonusDetails.status==1){
+										text +='<span class="s_txt">充值成功</span>';
+									}else{
+										text +='<span class="s_txt">充值中</span>';
+									}
+									
+								}else{
+									text +='<span class="s_txt">充值成功</span>';
+								}
+								
+								
+							}
+							else if(item.status==3){
+								text +='<span class="s_txt c_2">充值失败,退款中</span>';
+							}
+							else if(item.status==0){
+								text +='<span class="s_txt c_1">充值失败,已退款</span>';
+							}
+							else{
+								text +='<span class="s_txt c_3">充值处理中</span>';
+							}
+							
+							/*text +='';
+							text +='<span class="s_txt c_2">充值失败</span>';
+							text +='';*/
+							text +='</li>';
+							text +='<li>';
+							var payDetails = item.payDetails;
+							for(var j=0;j<payDetails.length;j++){
+								var payDetail = payDetails[j];
+								if(payDetail.type == 0) {
+									text +='<p>￥'+payDetail.value/100+'</p>';
+								}
+							}
+							text +='</li>';
+							text +='</ul>';
+							text +='</a>';
+							text +='</div>';
+							$J(".itemorder:last").after(text);	
+		           		});
+	           			
+	           			$J("#pageNo").val(page.pageNo);
+					}
+				}else{
+					swal(errorMsg);
+				}
+					  
+			}
+		};
+		ajaxRequest(url, param, success,timeoutFunction);
+	}
+</script>

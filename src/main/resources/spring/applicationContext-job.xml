@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd 
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<description>job</description>
+	
+	<!-- 失败退款job -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="triggers">
+	        <list>
+	            <ref bean="checkFailOrderTrigger"/>
+	        </list>
+	    </property>
+		<property name="autoStartup" value="true"/>
+	</bean>
+	
+	<bean id="checkFailOrderTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+       <property name="jobDetail" ref="checkFailOrderJobDetail"/>
+       <property name="cronExpression" value="0 0/15 * * * ?"/>
+	</bean>
+	
+	<bean id="checkFailOrderJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+        <property name="targetObject" ref="checkFailOrderJob"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+	</bean>
+	
+	<bean id="checkFailOrderJob" class="com.tenfen.job.CheckFailOrderJob"/>
+</beans>

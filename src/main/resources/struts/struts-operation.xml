@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 运营相关 -->
+	<package name="operation" namespace="/operation" extends="default">
+		<!-- H码表 -->
+		<action name="mobileArea_*" method="{1}" class="com.tenfen.www.action.system.operation.MobileAreaAction"></action>
+		<!-- 供应商 -->
+		<action name="supplier_*" method="{1}" class="com.tenfen.www.action.system.operation.FluxSupplierAction"></action>
+		<!-- 流量包管理 -->
+		<action name="package_*" method="{1}" class="com.tenfen.www.action.system.operation.FluxPackageAction"></action>
+		<!-- 产品管理 -->
+		<action name="product_*" method="{1}" class="com.tenfen.www.action.system.operation.FluxProductAction"></action>
+		<!-- 微信订单管理 -->
+		<action name="wxorder_*" method="{1}" class="com.tenfen.www.action.system.operation.FluxWxOrderAction"></action>
+		<!-- 业务订单管理 -->
+		<action name="bsorder_*" method="{1}" class="com.tenfen.www.action.system.operation.FluxBsOrderAction"></action>
+	</package>
+
+</struts>
